@@ -49,7 +49,7 @@ library(ggraph)
 library(tidygraph)
 library(igraph)
 
-setwd("C:/Users/DSall/Desktop/Uni/BIOX7005/repo_clone/Streptomycin")
+setwd("C:/Users/DSall/Desktop/Uni/BIOX7005/repo_clone/QNL")
 source("R/util.R")
 source("R/bioinformatics.R")
 source("R/analyses.R")
@@ -67,9 +67,10 @@ globsets <- list(
   min_alig_score = -Inf, # minimum alignment score (with E. coli) of included gene target sequences
   max_core_dist = 40, # maximum Levenshtein distance between E. coli core gene region to corresponding target region
   phylo_stats_sample_n = 5000, # number of species to sample for phylogenetics statistics
-  random_seed = 22
+  random_seed = 22,
 )
 options(nwarnings = 10000)
+my_target_gene = "gyrA" #Target gene for downstream analysis
 
 set.seed(globsets$random_seed)
 
@@ -77,8 +78,10 @@ set.seed(globsets$random_seed)
 ### Step 1: Processing reference files                              ###
 ########################################################################
 # Read the mutations data from a CSV file
-muts <- read.csv("./data/reported_mutations.csv") |>
-  filter(Gene == "rpsL")
+# Select unique species from the mutations data and create a gene reference data frame
+muts <- read.delim("./data/AMRFinder_parsed_with_species_strain.txt") |>
+  filter(Gene == my_target_gene)
+
 
 # Select unique species from the mutations data and create a gene reference data frame
 selected_muts <- muts |>
@@ -88,7 +91,7 @@ selected_muts <- muts |>
     ID = NA, # Initialize the 'ID' column with NA
     Strain = NA, # Initialize the 'Strain' column with NA
     RefStrain = NA, # Initialize the 'RefStrain' column with NA
-    Gene = "rpsL", # Add the gene name as 'rpsL'
+    Gene = my_target_gene, # Add the gene name as 'rpsL'
     Assembly_ID = NA, # Initialize the 'Assembly_ID' column with NA
     NCBI_Reference_sequence = NA # Initialize the 'NCBI_Reference_sequence' column with NA
   )
@@ -148,6 +151,10 @@ for (i in 1:nrow(selected_muts)) {
     extract_strain_info <- function(nuc_result) {
       strain <- nuc_result$strain
       ref_seq <- nuc_result$accessionversion
+      # Some NCBI nucleotide records do not contain strain metadata (DS ADDITION)
+      if (is.null(strain) || length(strain) == 0) {
+        strain <- NA_character_
+      }
 
       # If the species is E. coli, force strain to be MG1655
       if (grepl("Escherichia coli", species, ignore.case = TRUE)) {
@@ -195,7 +202,7 @@ added_name_muts <- selected_muts |>
   select(-Species_name, Strain_name)
 
 # Save the table as a CSV file
-write.csv(added_name_muts, "data/rpsL_references.csv", row.names = FALSE)
+write.csv(added_name_muts, paste0("data/", my_target_gene, "_references.csv"), row.names = FALSE)
 
 # Initialize an empty list to store the sequences from all downloads
 all_sequences <- list()
@@ -203,15 +210,15 @@ all_sequences <- list()
 for (j in 1:length(summaries)) {
   id <- names(summaries[j])
   cat(paste0("Downloading genome for species #", j, "/", length(summaries), "\n..."))
-  file_path <- download_file(summaries[[j]], dir = "output/rpsL_references")
+  file_path <- download_file(summaries[[j]], dir = paste0("output/", my_target_gene, "_references"))
   fasta_file <- sub("\\.gz$", "", file_path)
   sequences <- readDNAStringSet(fasta_file)
-  matching_seq <- sequences[grep("rpsL|30S ribosomal protein S12($|\\])", names(sequences))]
+  matching_seq <- sequences[grep("gyrA|DNA gyrase subunit A($|\\])", names(sequences))]
   if (length(matching_seq) == 0) {
-    cat(paste0("No rpsL found for species ID ", id, "\n"))
+    cat(paste0("No gyrA found for species ID ", id, "\n"))
     next
   } else if (length(matching_seq) > 1) {
-    cat("There are ", length(matching_seq), "copies of rpsL. \n")
+    cat("There are ", length(matching_seq), "copies of g. \n")
     matching_seq <- matching_seq[1]
   }
   names(matching_seq) <- added_name_muts[added_name_muts$ID == id, ]$FASTA_name
@@ -221,10 +228,10 @@ for (j in 1:length(summaries)) {
 combined_sequences <- do.call(c, all_sequences)
 
 # Write the combined sequences to a new FASTA file
-writeXStringSet(combined_sequences, "data/rpsL_references.fasta")
+writeXStringSet(combined_sequences, paste0("data/",my_target_gene, "_references.fasta"))
 
 # empty working environment to keep everything clean
-rm.all.but("globsets")
+rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 
 ########################################################################
 ### Step 2: Processing table of known STR resistance mutations       ###
@@ -241,30 +248,33 @@ rm.all.but("globsets")
 # 1 get rpsL ref sequences coordination of all reference sequences against the one in Escherichia coli
 
 # load reference sequences and their information
-refs <- read_csv("./data/rpsL_references.csv", show_col_types = FALSE)
-seqs <- readDNAStringSet("./data/rpsL_references.fasta")
-mutation_list_reports <- read_csv("./data/reported_mutations.csv", show_col_types = FALSE) |>
-  filter(Gene == "rpsL")
+refs <- read_csv(paste0("./data/",my_target_gene, "_references.csv"), show_col_types = FALSE)
+seqs <- readDNAStringSet(paste0("./data/",my_target_gene, "_references.fasta"))
+mutation_list_reports <- read.delim("./data/AMRFinder_parsed_with_species_strain.txt",na.strings = c("", "NA")) |>
+  filter(Gene == my_target_gene)
 
 # Check whether the above files have been changed and hence the coordinates need to be updated
-if (file.exists("./data/rpsL_fastahash.Rds") && as.character(openssl::sha1(file("./data/rpsL_references.fasta"))) == readRDS("./data/fastahash.Rds")) {
+if (file.exists(paste0("./data/", my_target_gene ,"_fastahash.Rds")) && as.character(openssl::sha1(file(paste0("./data/", my_target_gene, "_references.fasta")))) == readRDS(paste0("./data/", my_target_gene ,"_fastahash.Rds"))) {
   print("Sequences file has not changed, loading original coordinates")
-  load(file = "./output/coordinates.RData")
+  load(file = paste0("./output/", my_target_gene, "_coordinates.RData"))
 } else {
-  old_fastahash <- as.character(openssl::sha1(file("./data/rpsL_references.fasta")))
+  old_fastahash <- as.character(openssl::sha1(file(paste0("./data/",my_target_gene,"_references.fasta"))))
   saveRDS(old_fastahash,
-    file = "./data/fastahash.Rds"
+          file = paste0("./data/", my_target_gene ,"_fastahash.Rds")
   )
   print("Sequences file has changed, regenerating coordinates")
   # get coordinates
-  coordinates <- ALJEbinf::getAllCoordinates(seqs, "rpsL_Escherichia_coli_MG1655")
-  save(coordinates, file = "./output/rpsL_coordinates.RData")
+  coordinates <- ALJEbinf::getAllCoordinates(seqs, paste0(my_target_gene,"_Escherichia_coli_MG1655"))
+  save(coordinates, file = paste0("./output/", my_target_gene ,"_coordinates.RData"))
 }
 
 # 2 load and complete table of reported mutations:
+unfiltered_muts <- mutation_list_reports |>
+  fillMutationsTable(refs, seqs, coordinates)
 muts <- mutation_list_reports |>
   fillMutationsTable(refs, seqs, coordinates) |>
   filter(!is.na(AA_mut_name_Ecoli)) # filter out "bad" entries that couldn't be mapped to E. coli
+
 
 compareMutationsToRef <- function(seqs, muts) {
   muts <- muts |>
@@ -282,20 +292,20 @@ compareMutationsToRef <- function(seqs, muts) {
 
 added_warnings_muts <- compareMutationsToRef(seqs, muts)
 
-write_csv(added_warnings_muts, "./output/rpsL_muts.csv")
+write_csv(added_warnings_muts, paste0("./output/",my_target_gene,"_muts.csv"))
 # 3 summary and plot of reported mutations
-plot_reported_mutations(added_warnings_muts, file_name = "./plots/rpsL_reported_mutations_original.pdf", n_frequency = 3) # returns frequent reported mutations, positions and species
+plot_reported_mutations(added_warnings_muts, file_name = paste0("./plots/",my_target_gene,"_reported_mutations_original.pdf"), n_frequency = 3) # returns frequent reported mutations, positions and species
 summarise_reported_mutations(added_warnings_muts, file_name = "./results/summary_reported_mutations_original.txt") # returns a text message summarizing previous reports
 
 # Manually check all warnings and correct mutations
-checked_muts <- read.csv("./output/rpsL_checked_muts.csv")
+checked_muts <- read.csv(paste0("./output/",my_target_gene,"_checked_muts.csv"))
 
 # 3 summary and plot of reported mutations
-plot_reported_mutations(checked_muts, file_name = "./plots/rpsL_reported_mutations_manualfix.pdf", n_frequency = 3) # returns frequent reported mutations, positions and species
-summarise_reported_mutations(checked_muts, file_name = "./results/summary_rpsL_reported_mutations_manualfix.txt") # returns a text message summarizing previous reports
+plot_reported_mutations(checked_muts, file_name = paste0("./plots/",my_target_gene,"_reported_mutations_manualfix.pdf"), n_frequency = 3) # returns frequent reported mutations, positions and species
+summarise_reported_mutations(checked_muts, file_name = paste0("./results/summary_",my_target_gene,"_reported_mutations_manualfix.txt")) # returns a text message summarizing previous reports
 
 # empty working environment to keep everything clean
-rm.all.but("globsets")
+rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 
 ##############################################################################
 ### Step 3: Retrieving target sequences from all bacterial reference genomes ###
@@ -343,7 +353,7 @@ download_taxonomy(summaries, output_file = "./data/rpsL_NCBI_taxonomy.csv")
 # download_taxonomy(summaries, output_file = "./data/rpsL_NCBI_taxonomy_with_species.csv")
 
 # empty working environment to keep everything clean
-rm.all.but("globsets")
+rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 
 #########################################################################
 ### Step 4: Checking all target sequences for reported mutations      ###
@@ -384,7 +394,7 @@ raw_output <- do.call(rbind, raw_output[sapply(raw_output, is.data.frame)])
 write_csv(raw_output, file = "./output/rpsL_raw_output.csv")
 
 # empty working environment to keep everything clean:
-rm.all.but("globsets")
+rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 
 ########################################################################
 ### Step 5: Processing and filtering of raw output                   ###
@@ -445,7 +455,7 @@ plot_target_sequences_stats(raw_output,
 )
 
 # empty working environment to keep everything clean:
-rm.all.but("globsets")
+rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 
 ########################################################################
 ### Step 6: Analysis of results  ###
@@ -490,7 +500,7 @@ write_csv(multiseq_stats, "./output/rpsL_multiseq_stats.csv")
 plot_multiseq_stats(multiseq_stats, "./plots/rpsL_multiseq.pdf")
 
 # empty working environment to keep everything clean:
-rm.all.but("globsets")
+rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 
 #########################################################################
 ### Step 7: Phylogenetic distribution of resistance and evolvability  ###
@@ -549,7 +559,7 @@ plot_subtree_clades(subtree, species_output, gtdb_taxonomy,
 summarise_phylogenetics(subtree, species_output, sample_n = globsets$phylo_stats_sample_n, "./results/summary_rpsL_phylogenetics_relabelled.txt")
 
 # empty working environment to keep everything clean:
-rm.all.but("globsets")
+rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 
 
 ########################################################################
@@ -605,7 +615,7 @@ for (i in 1:nrow(networks)) {
 }
 
 # empty working environment to keep everything clean:
-rm.all.but("globsets")
+rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 
 
 ########################################################################

@@ -1,0 +1,20 @@
+Summary of reported mutations 
+Date: 2026-09-03 16:11:29.580339
+--------------------------------------------------------------------
+
+All mutations:
+    Number of studies: 1
+    Number of species: 25
+    Total number of mutations: 209
+    Amino acid positions with mutations: 20
+    Number of unique amino acid mutations: 59
+Filtered mutations:
+    Number of studies: 0
+    Number of species: 0
+    Total number of mutations: 0
+    Amino acid positions with mutations: 0
+    Number of unique amino acid mutations: 0
+Mutations in Mycobacterium tuberculosis (MTB) clinical isolates:
+    Number of filtered mutations also reported in MTB: 0
+    Number of filtered mutations collated without MTB data: 0
+    Number of filtered mutations collated without MTB data also reported in MTB: 0
