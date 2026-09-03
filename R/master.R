@@ -61,13 +61,13 @@ source("R/structure.R")
 
 # Global settings and parameters:
 globsets <- list(
-  min_n_studies = 3, # minimum number of studies that a mutation needs to be reported in for inclusion
-  min_n_species = 3, # minimum number of species that a mutation needs to be reported in for inclusion
+  min_n_studies = 1, # minimum number of studies that a mutation needs to be reported in for inclusion
+  min_n_species = 1, # minimum number of species that a mutation needs to be reported in for inclusion
   min_seq_length = 300, # minimum length of included gene target sequences
   min_alig_score = -Inf, # minimum alignment score (with E. coli) of included gene target sequences
-  max_core_dist = 40, # maximum Levenshtein distance between E. coli core gene region to corresponding target region
+  max_core_dist = 90, # maximum Levenshtein distance between E. coli core gene region to corresponding target region
   phylo_stats_sample_n = 5000, # number of species to sample for phylogenetics statistics
-  random_seed = 22,
+  random_seed = 22
 )
 options(nwarnings = 10000)
 my_target_gene = "gyrA" #Target gene for downstream analysis
@@ -186,6 +186,7 @@ for (i in 1:nrow(selected_muts)) {
       }
     }
 
+
     # Assign extracted strain and reference sequence
     selected_muts$Strain[i] <- strain_info$strain
     selected_muts$NCBI_Reference_sequence[i] <- strain_info$ref_seq
@@ -271,6 +272,7 @@ if (file.exists(paste0("./data/", my_target_gene ,"_fastahash.Rds")) && as.chara
 # 2 load and complete table of reported mutations:
 unfiltered_muts <- mutation_list_reports |>
   fillMutationsTable(refs, seqs, coordinates)
+
 muts <- mutation_list_reports |>
   fillMutationsTable(refs, seqs, coordinates) |>
   filter(!is.na(AA_mut_name_Ecoli)) # filter out "bad" entries that couldn't be mapped to E. coli
@@ -335,21 +337,23 @@ summaries_ref <- get_summaries(db, term_ref)
 
 # combine summaries and save them
 summaries <- c(summaries_ref, summaries_rep)
-saveRDS(summaries, file = "./output/rpsL_summaries.rds")
+saveRDS(summaries, file = paste0("./output/",my_target_gene,"_summaries.rds"))
 
+######### DS changed
 # download genomes
-download_files(summaries, dir = "output/genomes")
+#download_files(summaries, dir = "output/genomes")
 
 # extract target sequences and save them as rds and fasta
-rpsL_target_sequences <- get_target_sequences(summaries,
-  dir = "output/genomes",
-  target_gene = "rpsL",
-  target_protein = "30S ribosomal subunit protein S12|30S ribosomal protein S12($|[^'])"
-)
-writeXStringSet(DNAStringSet(rpsL_target_sequences), filepath = "output/rpsL_target_sequences.fa")
+#gene_target_sequences <- get_target_sequences(summaries[1:10],
+# dir = "output/genomes",
+#target_gene = my_target_gene,
+#target_protein = "DNA gyrase subunit A($|[^'])"
+#)
+#writeXStringSet(DNAStringSet(gene_target_sequences), filepath = paste0("./output/",my_target_gene,"_target_sequences.fa"))
+
 
 # download and extract taxonomy information for downloaded genomes
-download_taxonomy(summaries, output_file = "./data/rpsL_NCBI_taxonomy.csv")
+download_taxonomy(summaries, output_file = paste0("./data/",my_target_gene,"_NCBI_taxonomy.csv"))
 # download_taxonomy(summaries, output_file = "./data/rpsL_NCBI_taxonomy_with_species.csv")
 
 # empty working environment to keep everything clean
@@ -367,9 +371,10 @@ rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 #                           for all target sequences ("./output/rpsL_raw_output.csv")
 
 # 1.load required data:
-muts <- read.csv("./output/rpsL_checked_muts.csv")
-rpsL_target_sequences <- readDNAStringSet("./output/rpsL_target_sequences.fa")
-rpsL_reference_Ecoli <- readDNAStringSet("./data/rpsL_references.fasta")[["rpsL_Escherichia_coli_MG1655"]]
+muts <- read.csv(paste0("./output/",my_target_gene,"_checked_muts.csv"))
+gene_target_sequences <- readDNAStringSet(paste0("./output/",my_target_gene,"_target_sequences.fa"))
+gene_reference_Ecoli <- readDNAStringSet(paste0("./data/",my_target_gene,"_references.fasta"))[[paste0(my_target_gene,"_Escherichia_coli_MG1655")]]
+
 
 # 2.make a list of reliable mutations to be screened:
 mutation_list_reports <- filter_mutations(muts,
@@ -381,17 +386,18 @@ mutation_list <- mutation_list_reports |>
   arrange(AA_pos_Ecoli, AA_mutation)
 
 # 3.screen all rpsL sequences for existing and possible mutations:
-raw_output <- screen_target_sequences(rpsL_target_sequences, rpsL_reference_Ecoli,
+gene_target_sequences = gene_target_sequences[1:100]  #do a small screen as proof of concept and if its running correctly
+raw_output <- screen_target_sequences(gene_target_sequences, gene_reference_Ecoli,
   mutation_list,
-  target_gene = "rpsL", n_workers = 6
+  target_gene = my_target_gene, n_workers = 6
 )
 
 # save error messages:
-saveRDS(raw_output[!sapply(raw_output, is.data.frame)], "./output/rpsL_raw_output_errors.rds")
+saveRDS(raw_output[!sapply(raw_output, is.data.frame)], paste0("./output/",my_target_gene,"_raw_output_errors.rds"))
 
 # save results:
 raw_output <- do.call(rbind, raw_output[sapply(raw_output, is.data.frame)])
-write_csv(raw_output, file = "./output/rpsL_raw_output.csv")
+write_csv(raw_output, file = paste0("./output/",my_target_gene,"_raw_output.csv"))
 
 # empty working environment to keep everything clean:
 rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
@@ -408,9 +414,10 @@ rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 #                       plots of target sequence statistics ("rpsL_target_sequence_stats_hist.pdf" & "rpsL_target_sequence_stats_pairs.pdf")
 
 # load required data:
-muts <- read_csv("./output/rpsL_checked_muts.csv", show_col_types = FALSE)
-raw_output <- read_csv("./output/rpsL_raw_output.csv", show_col_types = FALSE)
-genome_summaries <- read_rds("./output/rpsL_summaries.rds")
+muts <- read_csv(paste0("./output/",my_target_gene,"_checked_muts.csv"), show_col_types = FALSE)
+raw_output <- read_csv(paste0("./output/",my_target_gene,"_raw_output.csv"), show_col_types = FALSE)
+genome_summaries <- read_rds(paste0("./output/",my_target_gene,"_summaries.rds"))
+
 meta_data <- build_gtdb_metadata("./data/bac120_metadata.tsv")
 write_csv(meta_data, "./data/gtdb_meta_data.csv")
 
@@ -433,7 +440,7 @@ filtered_output <- raw_output |>
   semi_join(mutation_list_reports, by = join_by(AA_pos_Ecoli, AA_mutation))
 
 
-write_csv(filtered_output, "./output/rpsL_filtered_output.csv")
+write_csv(filtered_output, paste0("./output/",my_target_gene,"_filtered__output.csv"))
 
 
 # 3. analysis of extracted gene sequences and filtering:
@@ -443,15 +450,15 @@ summarise_target_sequences(genome_summaries,
   min_seq_length = globsets$min_seq_length,
   min_alig_score = globsets$min_alig_score,
   max_core_dist = globsets$max_core_dist,
-  target_gene = "rpsL",
-  file_name = "./results/summary_rpsL_target_sequences.txt"
+  target_gene = my_target_gene,
+  file_name = paste0("./results/summary_",my_target_gene,"_target_sequences.txt")
 )
 plot_target_sequences_stats(raw_output,
   filtered_output,
   min_seq_length = globsets$min_seq_length,
   min_alig_score = globsets$min_alig_score,
   max_core_dist = globsets$max_core_dist,
-  file_names = c("./plots/rpsL_target_sequence_stats_hist.pdf", "./plots/rpsL_target_sequence_stats_pairs.pdf")
+  file_names = c(paste0("./plots/",my_target_gene,"_target_sequence_stats_hist.pdf"), paste0("./plots/",my_target_gene,"_target_sequence_stats_pairs.pdf"))
 )
 
 # empty working environment to keep everything clean:

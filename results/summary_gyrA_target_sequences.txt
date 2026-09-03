@@ -1,0 +1,31 @@
+Summary of screened target gyrA sequences 
+Date: 2026-09-03 18:43:25.136719
+--------------------------------------------------------------------
+
+Target sequence statistics before filtering:
+    Number of genomes in search results: 22738
+    Number of genomes with extracted gyrA sequence(s): 93
+    Number of genomes where no gyrA sequence could be extracted: 22645
+    Number of species with downloaded genomes: 93
+    Total number of gyrA sequences: 95
+    Number of genomes with more than one gyrA sequence: 2
+    Maximum number of gyrA sequences per genome: 2
+Filtering statistics:
+    Minimum sequence length: 2418
+    Median sequence length: 2574.00
+    Mean sequence length: 2595.947
+    Maximum sequence length: 2829
+    Minimum aligning score: -1780.187
+    Maximum aligning score: 2913.94
+    Minimum distance from reference gyrA core: 81
+    Maximum distance from reference gyrA core: 554
+Filters applied: 
+    Minimum sequence length: 300
+    Minimum alignment score to E. coli gyrA: -Inf
+    Maximum core distance to E. coli gyrA: 90
+Target sequence statistics after filtering:
+    Number of genomes with extracted gyrA sequence(s): 0
+    Number of species with downloaded genomes: 0
+    Total number of gyrA sequences: 0
+    Number of genomes with more than one gyrA sequence: 0
+    Maximum number of gyrA sequences per genome: -Inf
