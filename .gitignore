@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+*.dmp
+.Ruserdata
+.DS_Store
+*.fna
+output/*
+!output/*.csv
+!output/raw_output_errors.rds
+!data/bac120_metadata_r232.tsv
+!output/cons.RData
+tmp/*

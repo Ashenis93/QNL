@@ -418,7 +418,7 @@ muts <- read_csv(paste0("./output/",my_target_gene,"_checked_muts.csv"), show_co
 raw_output <- read_csv(paste0("./output/",my_target_gene,"_raw_output.csv"), show_col_types = FALSE)
 genome_summaries <- read_rds(paste0("./output/",my_target_gene,"_summaries.rds"))
 
-meta_data <- build_gtdb_metadata("./data/bac120_metadata.tsv")
+meta_data <- build_gtdb_metadata("./data/bac120_metadata_r232.tsv")
 write_csv(meta_data, "./data/gtdb_meta_data.csv")
 
 # filter for mutations to be included in analyses:
@@ -440,7 +440,7 @@ filtered_output <- raw_output |>
   semi_join(mutation_list_reports, by = join_by(AA_pos_Ecoli, AA_mutation))
 
 
-write_csv(filtered_output, paste0("./output/",my_target_gene,"_filtered__output.csv"))
+write_csv(filtered_output, paste0("./output/",my_target_gene,"_filtered_output.csv"))
 
 
 # 3. analysis of extracted gene sequences and filtering:
@@ -481,9 +481,9 @@ rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 #                       plot showing the statistics for species with multiple gene copies ("./plots/rpsL_multicopy_stats.pdf")
 
 # 1. load required data:
-rpsL_target_sequences <- readDNAStringSet("./output/rpsL_target_sequences.fa")
-rpsL_reference_Ecoli <- readDNAStringSet("./data/rpsL_references.fasta")[["rpsL_Escherichia_coli_MG1655"]]
-filtered_output <- read_csv("./output/rpsL_filtered_output.csv", show_col_types = FALSE)
+rpsL_target_sequences <- readDNAStringSet(paste0("./output/",my_target_gene,"_target_sequences.fa"))
+rpsL_reference_Ecoli <- readDNAStringSet(paste0("./data/",my_target_gene,"_references.fasta"))[[paste0(my_target_gene,"_Escherichia_coli_MG1655")]]
+filtered_output <- read_csv(paste0("./output/",my_target_gene,"_filtered_output.csv"), show_col_types = FALSE)
 # bacterial_taxonomy <- read_csv("./data/rpsL_NCBI_taxonomy.csv", show_col_types = FALSE) # bacterial taxonomic information from NCBI
 meta_data <- read_csv("./data/gtdb_meta_data.csv", show_col_types = FALSE) # GTDB information on included species
 # bacterial taxonomic information from GTDB
@@ -493,18 +493,18 @@ gtdb_taxonomy <- meta_data |>
 write_csv(gtdb_taxonomy, "./data/gtdb_taxonomy.csv")
 
 # 2. analysis of mutant screen:
-plot_mutation_screen(filtered_output, file_name = "./plots/rpsL_mutation_screen.pdf")
-plot_classes_genera(filtered_output, gtdb_taxonomy, file_name = "./plots/rpsL_classes_genera.svg")
-plot_evolvability_by_class(filtered_output, gtdb_taxonomy, file_name = "./plots/rpsL_evolvability_by_class.pdf")
-summarise_mutation_screen(filtered_output, target_gene = "rpsL", file_name = "./results/summary_rpsL_mutation_screen.txt")
-get_resistance_taxonomy(filtered_output, gtdb_taxonomy, file_path = "./output/", gene_name = "rpsL")
-make_table_intrinsic_resistance(filtered_output, file_name = "./results/rpsL_predicted_resistance.csv")
+plot_mutation_screen(filtered_output, file_name = paste0("./plots/",my_target_gene,"_mutation_screen.pdf"))
+plot_classes_genera(filtered_output, gtdb_taxonomy, file_name = paste0("./plots/",my_target_gene,"_classes_genera.svg"))
+plot_evolvability_by_class(filtered_output, gtdb_taxonomy, file_name = paste0("./plots/",my_target_gene,"_evolvability_by_class.pdf"))
+summarise_mutation_screen(filtered_output, target_gene = my_target_gene, file_name = paste0("./results/summary_",,my_target_gene,"_mutation_screen.txt"))
+get_resistance_taxonomy(filtered_output, gtdb_taxonomy, file_path = "./output/", gene_name = my_target_gene)
+make_table_intrinsic_resistance(filtered_output, file_name = paste0("./results/",my_target_gene,"_predicted_resistance.csv"))
 
 # 3. analyse species with multiple gene copies:
 multiseq_stats <- compare_gene_copies(filtered_output, rpsL_target_sequences, rpsL_reference_Ecoli)
-write_csv(multiseq_stats, "./output/rpsL_multiseq_stats.csv")
+write_csv(multiseq_stats, paste0("./output/",my_target_gene,"_multiseq_stats.csv"))
 # multiseq_stats <- read_csv("./output/multiseq_stats.csv", show_col_types = FALSE)
-plot_multiseq_stats(multiseq_stats, "./plots/rpsL_multiseq.pdf")
+plot_multiseq_stats(multiseq_stats, paste0("./plots/",my_target_gene,"_multiseq.pdf"))
 
 # empty working environment to keep everything clean:
 rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
@@ -523,8 +523,10 @@ rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 #                       plot of subtree
 
 # 1.load required files:
-filtered_output <- read_csv("./output/rpsL_filtered_output.csv", show_col_types = FALSE)
-original_tree <- read.tree("./data/bac120.nwk") # GTDB bacterial tree of life
+filtered_output <- read_csv(paste0("./output/",my_target_gene,"_filtered_output.csv"), show_col_types = FALSE)
+#original_tree <- read.tree("./data/bac120.nwk") # GTDB bacterial tree of life
+original_tree <- read.tree("./data/bac120_r232.tree") # GTDB bacterial tree of life
+
 # bacterial_taxonomy <- read_csv("./data/NCBI_taxonomy.csv", show_col_types = FALSE) # bacterial taxonomic information from NCBI
 meta_data <- read_csv("./data/gtdb_meta_data.csv", show_col_types = FALSE) # GTDB information on included species
 # Generate NCBI–GTDB species mapping table strict 1-1 map
@@ -546,13 +548,13 @@ species_output <- get_species_output(filtered_output_gtdb)
 
 # 3.subset the tree based on species accessions and names:
 subtree <- get_subtree(filtered_output_gtdb, original_tree, meta_data)
-write.tree(subtree$tree, file = "./output/rpsL_subtree_relabelled.nwk")
+write.tree(subtree$tree, file = paste0("./output/",my_target_gene,"_subtree_relabelled.nwk"))
 
 # 4. subtree visualization:
-subtree <- read.tree("./output/rpsL_subtree_relabelled.nwk")
+subtree <- read.tree(paste0("./output/",my_target_gene,"_subtree_relabelled.nwk"))
 # subtree <- read.tree("./output/rpsL_subtree.nwk")
 # big tree of all species:
-plot_subtree(subtree, species_output, gtdb_taxonomy, file_name = "./plots/rpsL_phylogeny_relabelled/whole_genome_tree.svg")
+plot_subtree(subtree, species_output, gtdb_taxonomy, file_name = paste0("./plots/",my_target_gene,"_phylogeny_relabelled/whole_genome_tree.svg"))
 
 # smaller trees of individual clades:
 plot_subtree_clades(subtree, species_output, gtdb_taxonomy,
@@ -560,10 +562,10 @@ plot_subtree_clades(subtree, species_output, gtdb_taxonomy,
   families = c("Devosiaceae", "Mycobacteriaceae"),
   orders = c("Pirellulales", "Sphingomonadales", "Rickettsiales"),
   classes = c("Planctomycetia", "Alphaproteobacteria", "Coriobacteriia"),
-  file_path = "./plots/rpsL_phylogeny_relabelled/"
+  file_path = paste0("./plots/",my_target_gene,"_phylogeny_relabelled/")
 )
 
-summarise_phylogenetics(subtree, species_output, sample_n = globsets$phylo_stats_sample_n, "./results/summary_rpsL_phylogenetics_relabelled.txt")
+summarise_phylogenetics(subtree, species_output, sample_n = globsets$phylo_stats_sample_n, paste0("./results/summary_",my_target_gene,"_phylogenetics_relabelled.txt"))
 
 # empty working environment to keep everything clean:
 rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
@@ -584,8 +586,9 @@ rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 #                       plot of predictions for each mutation across species ("./plots/rpsL_mutation_screening.pdf")
 #                       plot of predictions for different genera, classes and species ("./plots/rpsL_mutations_by_species.pdf")
 
-muts <- read.csv("./output/rpsL_checked_muts.csv")
-filtered_output <- read.csv("./output/rpsL_filtered_output.csv")
+muts <- read_csv(paste0("./output/",my_target_gene,"_checked_muts.csv"), show_col_types = FALSE)
+
+filtered_output <- read.csv(paste0("./output/",my_target_gene,"_filtered_output.csv"))
 
 mutation_list_reports <- filter_mutations(muts,
   min_n_species = globsets$min_n_species,
@@ -630,14 +633,14 @@ rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 ########################################################################
 
 # load required data:
-rpsL_reference_Ecoli <- readDNAStringSet("./data/rpsL_references.fasta")[["rpsL_Escherichia_coli_MG1655"]]
-filtered_output <- read_csv("./output/rpsL_filtered_output.csv", show_col_types = FALSE)
+rpsL_reference_Ecoli <- readDNAStringSet(paste0("./data/",my_target_gene,"_references.fasta"))[["rpsL_Escherichia_coli_MG1655"]]
+filtered_output <- read_csv(paste0("./output/",my_target_gene,"_filtered_output.csv"), show_col_types = FALSE)
 filtered_targets <- filtered_output |>
   pull(target_name) |>
   unique()
-rpsL_target_sequences <- readDNAStringSet("./output/rpsL_target_sequences.fa")[filtered_targets]
+rpsL_target_sequences <- readDNAStringSet(paste0("./output/",my_target_gene,"_target_sequences.fa"))[filtered_targets]
 
-mutations <- read_csv("./output/rpsL_checked_muts.csv", show_col_types = FALSE) |>
+mutations <- read_csv(paste0("./output/",my_target_gene,"_checked_muts.csv"), show_col_types = FALSE) |>
   filter_mutations(
     min_n_species = globsets$min_n_species,
     min_n_studies = globsets$min_n_studies
@@ -648,8 +651,8 @@ set.seed(globsets$random_seed)
 cons <- get_conservation(rpsL_target_sequences, rpsL_reference_Ecoli, n_rnd = 1e5, n_workers = 10)
 save(cons, file = "./output/cons.RData")
 summarise_conservation(cons,
-  target_gene = "rpsL",
-  file_name = "./results/summary_rpsL_conservation.txt"
+  target_gene = my_target_gene,
+  file_name = paste0("./results/summary_",my_target_gene,"_conservation.txt")
 )
 plot_cons(cons,
   pos = mutations |> pull(AA_pos_Ecoli) |> unique(),
@@ -683,9 +686,9 @@ visualise_rpsL_structure(
   chain_ids = c("L", "A"),
   pos = mutations |> pull(AA_pos_Ecoli) |> unique(),
   mut_colour_variable = cons$means$grantham_Ecoli,
-  file_html = "./plots/rpsL_structure.html"
+  file_html = paste0("./plots/",my_target_gene,"_structure.html")
 )
-quarto_render("plots/rpsL_structure_embedding.qmd")
+quarto_render(paste0("plots/",my_target_gene,"_structure_embedding.qmd"))
 
 ########################################################################
 ### Step 10: Compile final report                                    ###
@@ -702,5 +705,5 @@ render_summary(
   ),
   preamble = "./data/summary_preamble.qmd",
   summaries_path = "./results",
-  gene_name = "rpsL"
+  gene_name = my_target_gene
 )
