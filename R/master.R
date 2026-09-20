@@ -349,7 +349,7 @@ gyrA_target_sequences <- get_target_sequences(
   target_gene = "gyrA",
   target_protein = "DNA gyrase subunit A"
 )
-writeXStringSet(DNAStringSet(rpsL_target_sequences), filepath = paste0("output/",my_target_gene,"_target_sequences.fa"))
+writeXStringSet(DNAStringSet(gyrA_target_sequences), filepath = paste0("output/",my_target_gene,"_target_sequences.fa"))
 
 # download and extract taxonomy information for downloaded genomes
 download_taxonomy(summaries, output_file = paste0("./data/",my_target_gene,"_NCBI_taxonomy.csv"))
