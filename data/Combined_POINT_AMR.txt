@@ -1,0 +1,403 @@
+Species	Strain	Genotype	Gene	Nt_pos	Nt_pos_Ecoli	Nt_original	Nt_mutation	Nt_OtoM	Nt_mut_name	Nt_mut_name_Ecoli	Codon_original	Codon_mutation	Codon_OtoM	AA_pos	AA_pos_Ecoli	AA_original	AA_mutation	AA_OtoM	AA_mut_name	AA_mut_name_Ecoli	Origin	MIC_mgPerL	Rel_fitness	n_clones	Comments	Ref_code	Evidence_category	Drug Used	Database Used
+Acinetobacter baumannii			gyrA											79		G	C									15282231		QUINOLONE	NCBI AMR Reference Gene Catalog
+Acinetobacter baumannii			gyrA											81		S	L									15282231		QUINOLONE	NCBI AMR Reference Gene Catalog
+Burkholderia cepacia			gyrA											81		G	D									25153194		QUINOLONE	NCBI AMR Reference Gene Catalog
+Burkholderia cepacia			gyrA											83		T	I									25153194		QUINOLONE	NCBI AMR Reference Gene Catalog
+Burkholderia cepacia			gyrA											87		D	H									25153194		QUINOLONE	NCBI AMR Reference Gene Catalog
+Burkholderia pseudomallei			gyrA											77		Y	S									28400528		QUINOLONE	NCBI AMR Reference Gene Catalog
+Burkholderia pseudomallei			gyrA											81		G	C									19121669		QUINOLONE	NCBI AMR Reference Gene Catalog
+Burkholderia pseudomallei			gyrA											83		T	I									19121669		QUINOLONE	NCBI AMR Reference Gene Catalog
+Burkholderia pseudomallei			gyrA											87		D	Y									19121669		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter coli			gyrA											86		T	I									8384814		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter coli			gyrA											86		T	I									12121947		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter coli			gyrA											86		T	I									12493783		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter coli			gyrA											86		T	I									15078520		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter coli			gyrA											86		T	I									16553723		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter coli			gyrA											86		T	I									39296292		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter coli			gyrA											104		P	S									12121947		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter coli			gyrA											104		P	S									12493783		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter coli			gyrA											104		P	S									15078520		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter coli			gyrA											104		P	S									16553723		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter coli			gyrA								GCC			70		A	T									8384814		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter coli			gyrA								ACA			86		T	I									11266291		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter coli			gyrA								ACA			86		T	A									Unpublished		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter coli			gyrA								ACA			86		T	K									8384814		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter coli			gyrA								ACA			86		T	V									16713726		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter coli			gyrA								GAT			90		D	A									8384814		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter coli			gyrA								GAT			90		D	N									8384814		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter coli			gyrA								GAT			90		D	T									16713726		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter jejuni			gyrA											70		A	T									8384814		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											85		D	Y									18031331		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											86		T	I									8384814		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											86		T	I									12121947		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											86		T	I									12493783		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											86		T	I									15078520		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											86		T	I									16553723		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											86		T	I									39296292		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											90		D	A									8384814		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											90		D	T									8384814		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											104		P	S									12121947		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											104		P	S									12493783		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											104		P	S									15078520		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA											104		P	S									16553723		QUINOLONE	NCBI AMR Reference Gene Catalog
+Campylobacter jejuni			gyrA								GCC			70		A	T									8384814		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter jejuni			gyrA								ACA			86		T	I									11266291		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter jejuni			gyrA								ACA			86		T	A									Unpublished		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter jejuni			gyrA								ACA			86		T	K									8384814		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter jejuni			gyrA								ACA			86		T	V									16713726		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter jejuni			gyrA								GAT			90		D	A									8384814		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter jejuni			gyrA								GAT			90		D	N									8384814		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Campylobacter jejuni			gyrA								GAT			90		D	T									16713726		Nalidixic acid, Ciprofloxacin	POINTFINDER
+Citrobacter freundii			gyrA											83		T	I									9756773		QUINOLONE	NCBI AMR Reference Gene Catalog
+Citrobacter freundii			gyrA											87		D	G									9756773		QUINOLONE	NCBI AMR Reference Gene Catalog
+Clostridioides difficile			gyrA											71		D	G									22508299		QUINOLONE	NCBI AMR Reference Gene Catalog
+Clostridioides difficile			gyrA											71		D	V									22508299		QUINOLONE	NCBI AMR Reference Gene Catalog
+Clostridioides difficile			gyrA											81		D	N									22508299		QUINOLONE	NCBI AMR Reference Gene Catalog
+Clostridioides difficile			gyrA											82		T	A									22508299		QUINOLONE	NCBI AMR Reference Gene Catalog
+Clostridioides difficile			gyrA											82		T	I									12384345		QUINOLONE	NCBI AMR Reference Gene Catalog
+Clostridioides difficile			gyrA											82		T	I									19818865		QUINOLONE	NCBI AMR Reference Gene Catalog
+Clostridioides difficile			gyrA											82		T	V									11451695		QUINOLONE	NCBI AMR Reference Gene Catalog
+Clostridioides difficile			gyrA											118		A	S									19364867		QUINOLONE	NCBI AMR Reference Gene Catalog
+Clostridioides difficile			gyrA											118		A	T									12384345		QUINOLONE	NCBI AMR Reference Gene Catalog
+Clostridioides difficile			gyrA											118		A	T									19818865		QUINOLONE	NCBI AMR Reference Gene Catalog
+Clostridioides difficile			gyrA											384		A	D									27842877		QUINOLONE	NCBI AMR Reference Gene Catalog
+Corynebacterium diphtheriae			gyrA											89		S	F									31736013		QUINOLONE	NCBI AMR Reference Gene Catalog
+Corynebacterium diphtheriae			gyrA											89		S	F									33246485		QUINOLONE	NCBI AMR Reference Gene Catalog
+Corynebacterium diphtheriae			gyrA											89		S	V									31736013		QUINOLONE	NCBI AMR Reference Gene Catalog
+Corynebacterium diphtheriae			gyrA											89		S	V									33246485		QUINOLONE	NCBI AMR Reference Gene Catalog
+Corynebacterium diphtheriae			gyrA											93		D	A									31736013		QUINOLONE	NCBI AMR Reference Gene Catalog
+Corynebacterium diphtheriae			gyrA											93		D	A									33246485		QUINOLONE	NCBI AMR Reference Gene Catalog
+Corynebacterium diphtheriae			gyrA											93		D	Y									31736013		QUINOLONE	NCBI AMR Reference Gene Catalog
+Corynebacterium diphtheriae			gyrA											93		D	Y									33246485		QUINOLONE	NCBI AMR Reference Gene Catalog
+Enterobacter cloacae			gyrA											83		S	F									9756773		QUINOLONE	NCBI AMR Reference Gene Catalog
+Enterobacter cloacae			gyrA											83		S	I									9756773		QUINOLONE	NCBI AMR Reference Gene Catalog
+Enterobacter cloacae			gyrA											83		S	Y									9756773		QUINOLONE	NCBI AMR Reference Gene Catalog
+Enterobacter cloacae			gyrA											87		D	G									10428935		QUINOLONE	NCBI AMR Reference Gene Catalog
+Enterobacter cloacae			gyrA											87		D	H									10428935		QUINOLONE	NCBI AMR Reference Gene Catalog
+Enterobacter cloacae			gyrA											87		D	N									9756773		QUINOLONE	NCBI AMR Reference Gene Catalog
+Enterococcus faecium			gyrA								AGT			83		S	R									10103206		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Enterococcus faecium			gyrA								AGT			83		S	R									10508034		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Enterococcus faecium			gyrA								AGT			83		S	R									21571624		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Enterococcus faecium			gyrA								AGT			83		S	I									10103206		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Enterococcus faecium			gyrA								AGT			83		S	I									21571624		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Enterococcus faecium			gyrA								AGT			83		S	Y									10103206		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Enterococcus faecium			gyrA								AGT			83		S	Y									21571624		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Enterococcus faecium			gyrA								AGT			83		S	L									10508034		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Enterococcus faecium			gyrA								GAG			87		E	K									10103206		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Enterococcus faecium			gyrA								GAG			87		E	G									10508034		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Enterococcus faecium			gyrA								GAG			87		E	G									21571624		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Enterococcus faecium			gyrA								GAG			87		E	L									10508034		Nalidixic acid, Ciprofloxacin	FROM STUDY
+Escherichia coli			gyrA											51		A	V									11451702		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											67		A	S									2168148		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											81		G	C									2168148		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											81		G	D									8392306		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											82		D	G									8980760		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	A									10590273		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	A									11699598		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	A									12654733		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	L									8849244		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	L									8891148		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	L									11699598		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	L									14506034		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	V									10590273		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	V									12654733		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	W									2168148		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	W									2548439		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											83		S	W									8849244		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											84		A	P									2168148		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											84		A	V									7840592		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	G									8849244		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	G									8891148		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	G									9756773		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	G									9988045		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	G									14506034		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	G									29091182		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	H									8891148		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	H									11310803		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	H									12654733		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	H									14506034		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	H									29091182		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	N									7840592		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	N									8891148		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	N									11699598		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	N									14506034		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	V									1850972		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	Y									7840592		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	Y									8849244		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	Y									8891148		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	Y									11310803		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											87		D	Y									14506034		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											106		Q	H									2168148		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											106		Q	R									1850970		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA											196		A	E									14506034		QUINOLONE	NCBI AMR Reference Gene Catalog
+Escherichia coli			gyrA								GCC			51		A	V									11451702		Nalidixic acid	POINTFINDER
+Escherichia coli			gyrA								GCC			67		A	S									2168148		Nalidixic acid	POINTFINDER
+Escherichia coli			gyrA								GGT			81		G	C									2168148		Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								GGT			81		G	D									8392306		Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								GGT			81		G	C									2168148		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								GGT			81		G	D									8392306		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								GAC			82		D	G									8980760		Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								GAC			82		D	G									8980760		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								TCG			83		S	L									8891148		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								TCG			83		S	W									2168148		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								TCG			83		S	A									12654733		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								TCG			83		S	V									12654733		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	N									12654733		Nalidixic acid	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	G									12654733		Nalidixic acid	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	Y									12654733		Nalidixic acid	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	A									22878251		Nalidixic acid	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	H									12654733		Nalidixic acid	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	V									1850972		Nalidixic acid	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	N									12654733		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	G									12654733		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	Y									12654733		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	A									22878251		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	H									12654733		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Escherichia coli			gyrA								GAC			87		D	V									1850972		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Haemophilus influenzae			gyrA											84		S	L									38482359		QUINOLONE	NCBI AMR Reference Gene Catalog
+Haemophilus influenzae			gyrA											84		S	Y									8807076		QUINOLONE	NCBI AMR Reference Gene Catalog
+Haemophilus influenzae			gyrA											88		D	G									30145620		QUINOLONE	NCBI AMR Reference Gene Catalog
+Haemophilus influenzae			gyrA											88		D	N									8807076		QUINOLONE	NCBI AMR Reference Gene Catalog
+Haemophilus influenzae			gyrA											88		D	Y									8807076		QUINOLONE	NCBI AMR Reference Gene Catalog
+Helicobacter pylori			gyrA											87		N	K									14638505		QUINOLONE	NCBI AMR Reference Gene Catalog
+Helicobacter pylori			gyrA											87		N	K									38525761		QUINOLONE	NCBI AMR Reference Gene Catalog
+Helicobacter pylori			gyrA											91		D	G									14638505		QUINOLONE	NCBI AMR Reference Gene Catalog
+Helicobacter pylori			gyrA											91		D	N									14638505		QUINOLONE	NCBI AMR Reference Gene Catalog
+Helicobacter pylori			gyrA											91		D	N									27391421		QUINOLONE	NCBI AMR Reference Gene Catalog
+Helicobacter pylori			gyrA											91		D	N									38525761		QUINOLONE	NCBI AMR Reference Gene Catalog
+Helicobacter pylori			gyrA											91		D	Y									14638505		QUINOLONE	NCBI AMR Reference Gene Catalog
+Klebsiella oxytoca			gyrA											83		T	I									9756773		QUINOLONE	NCBI AMR Reference Gene Catalog
+Klebsiella oxytoca			gyrA											87		D	G									10428935		QUINOLONE	NCBI AMR Reference Gene Catalog
+Klebsiella pneumoniae			gyrA								TCC			83		S	L									22633335		ciprofloxacin	POINTFINDER
+Klebsiella pneumoniae			gyrA								TCC			83		S	F									22633335		ciprofloxacin	POINTFINDER
+Klebsiella pneumoniae			gyrA								TCC			83		S	Y									22633335		ciprofloxacin	POINTFINDER
+Klebsiella pneumoniae			gyrA								TCC			83		S	I									30445211		ciprofloxacin	POINTFINDER
+Klebsiella pneumoniae			gyrA								GAC			87		D	A									22633335		ciprofloxacin	POINTFINDER
+Klebsiella pneumoniae			gyrA								GAC			87		D	N									22633335		ciprofloxacin	POINTFINDER
+Klebsiella pneumoniae			gyrA								GAC			87		D	G									22633335		ciprofloxacin	POINTFINDER
+Mycobacterium tuberculosis			gyrA								CGC			68		R	G									23561273		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								AGC			69		S	T									23561273		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								CAC			70		H	R									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								CAC			70		H	R									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCC			74		A	S									24055765		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCC			74		A	S									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCC			74		A	S									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCC			74		A	S									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								ACC			80		T	A									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								ACC			80		T	A									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								ACC			80		T	A									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GGC			88		G	C									24055765		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GGC			88		G	C									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GGC			88		G	C									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GGC			88		G	A									24055765		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GGC			88		G	A									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GGC			88		G	A									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GGC			88		G	A									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			89		D	N									23561273		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			89		D	N									22461677		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			89		D	N									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			89		D	N									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	E									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	V									23561273		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	V									23995137		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	V									24055765		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	V									23288402		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	V									23906937		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	V									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	V									22461677		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	V									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	V									23166667		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	V									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	G									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	G									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GCG			90		A	G									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								TCG			91		S	P									23561273		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								TCG			91		S	P									23288402		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								TCG			91		S	P									23906937		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								TCG			91		S	P									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								TCG			91		S	P									22461677		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								TCG			91		S	P									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								TCG			91		S	P									23166667		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								TCG			91		S	P									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								TCG			91		S	A									23561273		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								TCG			91		S	A									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								ATC			92		I	M									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	N									23561273		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	N									23995137		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	N									23288402		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	N									23906937		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	N									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	N									22461677		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	N									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	N									23166667		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	N									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	Y									23561273		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	Y									23288402		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	Y									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	Y									22461677		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	Y									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	Y									23166667		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	Y									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	H									23561273		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	H									24055765		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	H									23288402		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	H									23906937		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	H									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	H									22461677		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	H									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	H									23166667		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	H									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	V									24055765		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	V									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	V									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	V									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	A									23288402		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	A									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	A									22461677		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	A									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	A									23166667		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	A									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	G									23561273		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	G									24055765		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	G									23288402		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	G									23906937		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	G									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	G									22461677		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	G									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	G									23166667		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								GAC			94		D	G									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								CCC			102		P	H									23705640		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								CCC			102		P	H									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								CCC			102		P	H									19209951		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								CTG			109		L	V									22279180		FLUOROQUINOLONE	POINTFINDER
+Mycobacterium tuberculosis			gyrA								CTG			109		L	V									19209951		FLUOROQUINOLONE	POINTFINDER
+Neisseria gonorrhoeae			gyrA											91		S	F									7830580		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria gonorrhoeae			gyrA											91		S	I									38288762		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria gonorrhoeae			gyrA											91		S	Y									38288762		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria gonorrhoeae			gyrA											95		D	A									7830580		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria gonorrhoeae			gyrA											95		D	A									36735316		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria gonorrhoeae			gyrA											95		D	G									7830580		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria gonorrhoeae			gyrA											95		D	G									36735316		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria gonorrhoeae			gyrA											95		D	N									7830580		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria gonorrhoeae			gyrA								TCC			91		S	F									12529019		Quinolones	POINTFINDER
+Neisseria gonorrhoeae			gyrA								GAC			95		D	N									12529019		Quinolones	POINTFINDER
+Neisseria gonorrhoeae			gyrA								GAC			95		D	G									12529019		Quinolones	POINTFINDER
+Neisseria meningitidis			gyrA											91		T	A									35862973		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria meningitidis			gyrA											91		T	F									33900407		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria meningitidis			gyrA											91		T	I									26357666		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria meningitidis			gyrA											95		D	N									10799008		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria meningitidis			gyrA											95		D	Y									36758676		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria meningitidis			gyrA											95		D	Y									37874301		QUINOLONE	NCBI AMR Reference Gene Catalog
+Neisseria meningitidis			gyrA											173		T	A									22321998		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											72		D	G									15917569		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											80		H	R									22821356		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											81		G	C									31570397		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											81		G	D									29681898		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											83		T	A									23274661		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											83		T	I									8540700		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											83		T	I									33875431		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											86		Y	N									29681898		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											87		D	G									8540700		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											87		D	H									8540700		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											87		D	N									8540700		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											87		D	Y									12727072		QUINOLONE	NCBI AMR Reference Gene Catalog
+Pseudomonas aeruginosa			gyrA											106		Q	L									29681898		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											67		A	P									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											72		D	G									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											73		V	I									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											81		G	C									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											81		G	D									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											81		G	H									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											81		G	S									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											82		D	G									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											82		D	N									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											83		S	A									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											83		S	F									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											83		S	I									33877914		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											83		S	Y									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											87		D	G									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											87		D	K									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											87		D	N									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											87		D	Y									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											97		S	P									27559761		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											97		S	P									29091182		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											98		L	V									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											119		A	E									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											119		A	S									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											119		A	V									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											131		A	G									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA											139		E	A									15848289		QUINOLONE	NCBI AMR Reference Gene Catalog
+Salmonella enterica			gyrA								GCC			67		A	P									7492118		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAC			72		D	G									12409384		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GTA			73		V	I									12409384		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GGC			81		G	S									7492118		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GGC			81		G	C									10471553		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GGC			81		G	H									15153158		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAT			82		D	N									15215081		Nalidixic acid	POINTFINDER
+Salmonella enterica			gyrA								GAT			82		D	G									12523636		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								TCC			83		S	Y									7492118		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								TCC			83		S	Y									11283069		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								TCC			83		S	Y									12409384		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								TCC			83		S	F									7492118		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								TCC			83		S	F									10471553		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								TCC			83		S	F									11283069		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								TCC			83		S	F									12409384		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								TCC			83		S	F									15056435		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAC			87		D	K									15056435		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAC			87		D	N									7492118		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAC			87		D	N									11283069		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAC			87		D	G									10471553		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAC			87		D	G									11283069		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAC			87		D	G									12523636		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAC			87		D	G									15056435		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAC			87		D	Y									7492118		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAC			87		D	Y									11283069		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAC			87		D	Y									12409384		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								CTG			98		L	V									15388468		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GCA			119		A	E									12409384		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GCA			119		A	S									12409384		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GCA			119		A	V									8849216		Nalidixic acid	POINTFINDER
+Salmonella enterica			gyrA								GCC			131		A	G									15848289		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Salmonella enterica			gyrA								GAA			139		E	A									15848289		Nalidixic acid,Ciprofloxacin	POINTFINDER
+Serratia marcescens			gyrA											83		S	I									9756773		QUINOLONE	NCBI AMR Reference Gene Catalog
+Serratia marcescens			gyrA											83		S	R									9756773		QUINOLONE	NCBI AMR Reference Gene Catalog
+Serratia marcescens			gyrA											87		D	N									9756773		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											84		S	A									7492077		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											84		S	L									7811012		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											84		S	L									7492077		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											84		S	L									8889728		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											84		S	L									2174869		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											84		S	V									7492077		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											85		S	P									7811012		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											85		S	P									2174869		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											88		E	A									21996946		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											88		E	G									8889728		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											88		E	G									7492077		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											88		E	K									7811012		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											88		E	K									7492103		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											88		E	K									7884804		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA											88		E	K									8889728		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus aureus			gyrA								TCA			84		S	L									2174869		Ciprofloxacin	POINTFINDER
+Staphylococcus aureus			gyrA								TCA			84		S	L									20407243		Ciprofloxacin	POINTFINDER
+Staphylococcus aureus			gyrA								TCA			84		S	L									7811012		Ciprofloxacin	POINTFINDER
+Staphylococcus aureus			gyrA								TCA			84		S	L									9527766		Ciprofloxacin	POINTFINDER
+Staphylococcus aureus			gyrA								TCA			84		S	A									7811012		Ciprofloxacin	POINTFINDER
+Staphylococcus aureus			gyrA								TCA			84		S	A									1510411		Ciprofloxacin	POINTFINDER
+Staphylococcus aureus			gyrA								TCT			85		S	P									2174869		Ciprofloxacin	POINTFINDER
+Staphylococcus aureus			gyrA								GAA			88		E	K									15848290		Ciprofloxacin	POINTFINDER
+Staphylococcus aureus			gyrA								GAA			88		E	L									16769192		Ciprofloxacin	POINTFINDER
+Staphylococcus aureus			gyrA								GAA			88		E	G									15848290		Ciprofloxacin	POINTFINDER
+Staphylococcus aureus			gyrA								GAA			88		E	G									15848292		Ciprofloxacin	POINTFINDER
+Staphylococcus aureus			gyrA								GGC			106		G	D									9593159		Ciprofloxacin	POINTFINDER
+Staphylococcus pseudintermedius			gyrA											84		S	A									18305127		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus pseudintermedius			gyrA											84		S	L									18305127		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus pseudintermedius			gyrA											84		S	W									18305127		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus pseudintermedius			gyrA											85		S	A									18305127		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus pseudintermedius			gyrA											88		E	G									18305127		QUINOLONE	NCBI AMR Reference Gene Catalog
+Staphylococcus pseudintermedius			gyrA											88		E	K									18305127		QUINOLONE	NCBI AMR Reference Gene Catalog
+Vibrio cholerae			gyrA											83		S	I									12121955		QUINOLONE	NCBI AMR Reference Gene Catalog
+Vibrio cholerae			gyrA											87		D	N									23643392		QUINOLONE	NCBI AMR Reference Gene Catalog
+Vibrio parahaemolyticus			gyrA											83		S	F									31794931		QUINOLONE	NCBI AMR Reference Gene Catalog
+Vibrio parahaemolyticus			gyrA											83		S	I									10223929		QUINOLONE	NCBI AMR Reference Gene Catalog
+Vibrio vulnificus			gyrA											83		S	I									19218407		QUINOLONE	NCBI AMR Reference Gene Catalog
+Vibrio vulnificus			gyrA											83		S	R									19218407		QUINOLONE	NCBI AMR Reference Gene Catalog

@@ -61,8 +61,8 @@ source("R/structure.R")
 
 # Global settings and parameters:
 globsets <- list(
-  min_n_studies = 1, # minimum number of studies that a mutation needs to be reported in for inclusion
-  min_n_species = 1, # minimum number of species that a mutation needs to be reported in for inclusion
+  min_n_studies = 3, # minimum number of studies that a mutation needs to be reported in for inclusion
+  min_n_species = 3, # minimum number of species that a mutation needs to be reported in for inclusion
   min_seq_length = 300, # minimum length of included gene target sequences
   min_alig_score = -Inf, # minimum alignment score (with E. coli) of included gene target sequences
   max_core_dist = 90, # maximum Levenshtein distance between E. coli core gene region to corresponding target region
@@ -71,7 +71,7 @@ globsets <- list(
 )
 options(nwarnings = 10000)
 my_target_gene = "gyrA" #Target gene for downstream analysis
-
+dataset = "./data/Combined_POINT_AMR.txt"
 set.seed(globsets$random_seed)
 
 ########################################################################
@@ -79,9 +79,12 @@ set.seed(globsets$random_seed)
 ########################################################################
 # Read the mutations data from a CSV file
 # Select unique species from the mutations data and create a gene reference data frame
-muts <- read.delim("./data/AMRFinder_parsed_with_species_strain.txt") |>
-  filter(Gene == my_target_gene)
 
+#muts <- read.delim("./data/AMRFinder_parsed_with_species_strain.txt") |>
+ # filter(Gene == my_target_gene)
+
+muts <- read.delim(dataset) |>
+  filter(Gene == my_target_gene)
 
 # Select unique species from the mutations data and create a gene reference data frame
 selected_muts <- muts |>
@@ -232,7 +235,7 @@ combined_sequences <- do.call(c, all_sequences)
 writeXStringSet(combined_sequences, paste0("data/",my_target_gene, "_references.fasta"))
 
 # empty working environment to keep everything clean
-rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
+rm.all.but(c("globsets","my_target_gene","dataset" ), envir=.GlobalEnv)
 
 ########################################################################
 ### Step 2: Processing table of known STR resistance mutations       ###
@@ -251,7 +254,7 @@ rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 # load reference sequences and their information
 refs <- read_csv(paste0("./data/",my_target_gene, "_references.csv"), show_col_types = FALSE)
 seqs <- readDNAStringSet(paste0("./data/",my_target_gene, "_references.fasta"))
-mutation_list_reports <- read.delim("./data/AMRFinder_parsed_with_species_strain.txt",na.strings = c("", "NA")) |>
+mutation_list_reports <- read.delim(dataset,na.strings = c("", "NA")) |>
   filter(Gene == my_target_gene)
 
 # Check whether the above files have been changed and hence the coordinates need to be updated
@@ -300,7 +303,7 @@ plot_reported_mutations(added_warnings_muts, file_name = paste0("./plots/",my_ta
 summarise_reported_mutations(added_warnings_muts, file_name = "./results/summary_reported_mutations_original.txt") # returns a text message summarizing previous reports
 
 # Manually check all warnings and correct mutations
-checked_muts <- read.csv(paste0("./output/",my_target_gene,"_checked_muts.csv"))
+checked_muts <- read.csv(paste0("./output/",my_target_gene,"__checked_muts.csv"))
 
 # 3 summary and plot of reported mutations
 plot_reported_mutations(checked_muts, file_name = paste0("./plots/",my_target_gene,"_reported_mutations_manualfix.pdf"), n_frequency = 3) # returns frequent reported mutations, positions and species
@@ -340,17 +343,13 @@ summaries <- c(summaries_ref, summaries_rep)
 saveRDS(summaries, file = paste0("./output/",my_target_gene,"_summaries.rds"))
 
 ######### DS changed
-# download genomes
-#download_files(summaries, dir = "output/genomes")
-
-# extract target sequences and save them as rds and fasta
-#gene_target_sequences <- get_target_sequences(summaries[1:10],
-# dir = "output/genomes",
-#target_gene = my_target_gene,
-#target_protein = "DNA gyrase subunit A($|[^'])"
-#)
-#writeXStringSet(DNAStringSet(gene_target_sequences), filepath = paste0("./output/",my_target_gene,"_target_sequences.fa"))
-
+gyrA_target_sequences <- get_target_sequences(
+  summaries,
+  dir = "ref_genomes/assemblies",
+  target_gene = "gyrA",
+  target_protein = "DNA gyrase subunit A"
+)
+writeXStringSet(DNAStringSet(rpsL_target_sequences), filepath = paste0("output/",my_target_gene,"_target_sequences.fa"))
 
 # download and extract taxonomy information for downloaded genomes
 download_taxonomy(summaries, output_file = paste0("./data/",my_target_gene,"_NCBI_taxonomy.csv"))
@@ -386,7 +385,7 @@ mutation_list <- mutation_list_reports |>
   arrange(AA_pos_Ecoli, AA_mutation)
 
 # 3.screen all rpsL sequences for existing and possible mutations:
-gene_target_sequences = gene_target_sequences[1:100]  #do a small screen as proof of concept and if its running correctly
+gene_target_sequences = gene_target_sequences #[1:100]  #do a small screen as proof of concept and if its running correctly
 raw_output <- screen_target_sequences(gene_target_sequences, gene_reference_Ecoli,
   mutation_list,
   target_gene = my_target_gene, n_workers = 6
