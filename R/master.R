@@ -49,7 +49,7 @@ library(ggraph)
 library(tidygraph)
 library(igraph)
 
-setwd("C:/Users/DSall/Desktop/Uni/BIOX7005/repo_clone/QNL")
+#setwd("C:/Users/DSall/Desktop/Uni/BIOX7005/repo_clone/QNL")
 source("R/util.R")
 source("R/bioinformatics.R")
 source("R/analyses.R")
@@ -63,9 +63,9 @@ source("R/structure.R")
 globsets <- list(
   min_n_studies = 3, # minimum number of studies that a mutation needs to be reported in for inclusion
   min_n_species = 3, # minimum number of species that a mutation needs to be reported in for inclusion
-  min_seq_length = 300, # minimum length of included gene target sequences
+  min_seq_length = 2000, # minimum length of included gene target sequences
   min_alig_score = -Inf, # minimum alignment score (with E. coli) of included gene target sequences
-  max_core_dist = 90, # maximum Levenshtein distance between E. coli core gene region to corresponding target region
+  max_core_dist = 600, # maximum Levenshtein distance between E. coli core gene region to corresponding target region
   phylo_stats_sample_n = 5000, # number of species to sample for phylogenetics statistics
   random_seed = 22
 )
@@ -417,7 +417,7 @@ muts <- read_csv(paste0("./output/",my_target_gene,"_checked_muts.csv"), show_co
 raw_output <- read_csv(paste0("./output/",my_target_gene,"_raw_output.csv"), show_col_types = FALSE)
 genome_summaries <- read_rds(paste0("./output/",my_target_gene,"_summaries.rds"))
 
-meta_data <- build_gtdb_metadata("./data/bac120_metadata_r232.tsv")
+meta_data <- build_gtdb_metadata("./data/bac120_metadata.tsv")
 write_csv(meta_data, "./data/gtdb_meta_data.csv")
 
 # filter for mutations to be included in analyses:
@@ -490,6 +490,8 @@ gtdb_taxonomy <- meta_data |>
   select(phylum, class, order, family, genus) |>
   distinct()
 write_csv(gtdb_taxonomy, "./data/gtdb_taxonomy.csv")
+
+gtdb_taxonomy <- read_csv("./data/gtdb_taxonomy.csv")
 
 # 2. analysis of mutant screen:
 plot_mutation_screen(filtered_output, file_name = paste0("./plots/",my_target_gene,"_mutation_screen.pdf"))
