@@ -13,3 +13,4 @@ output/*
 tmp/*
 output/alignments/*
 data/bac120_metadata.tsv
+data/bac120_taxonomy.tsv
