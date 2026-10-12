@@ -203,6 +203,17 @@ add_gradient_legend <- function(xmin, xmax, ymin, ymax, max_value) {
   # Add minimum and maximum labels using text()
   text(x = xmin, y = ymin - (ymax-ymin)/200, labels = 0, pos = 1)
   text(x = xmax, y = ymin - (ymax-ymin)/200, labels = max_value, pos = 1)
+  
+  # scale label
+  text(
+    (xmin + xmax) / 2,
+    ymax,
+    labels = "Proportion of species",
+    pos = 3,
+    cex = 0.8
+  )
+  
+  
 }
 
 
@@ -294,8 +305,10 @@ plot_codon_network <- function(type = "type28",
                   nodes$coord_y[i], 
                   node_radius, 
                   col = ifelse(nodes$freq[i] < freq_threshold, "lightgrey",
-                               hsv(0.16, nodes$freq[i]/max(nodes$freq), 1)))
+                               #hsv(0.16, nodes$freq[i]/max(nodes$freq), 1)))
+                               hsv(0.16, nodes$freq[i], 1)))
 
+      
       # draw.circle(nodes$coord_x[i], 
       #             nodes$coord_y[i], 
       #             node_radius, 
@@ -322,7 +335,7 @@ plot_codon_network <- function(type = "type28",
                       minx + (maxx-minx)/6, 
                       miny, 
                       miny + (maxy-miny)/30, 
-                      round(max(nodes$freq, na.rm = TRUE), digits = 2))
+                      1)
   if (!is.null(file_path)) {
     dev.off()
   }

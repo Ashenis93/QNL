@@ -49,7 +49,7 @@ library(ggraph)
 library(tidygraph)
 library(igraph)
 
-#setwd("C:/Users/DSall/Desktop/Uni/BIOX7005/repo_clone/QNL")
+setwd("C:/Users/DSall/Desktop/Uni/BIOX7005/repo_clone/QNL")
 source("R/util.R")
 source("R/bioinformatics.R")
 source("R/analyses.R")
@@ -75,7 +75,6 @@ dataset = "./data/Combined_POINT_AMR.txt"
 set.seed(globsets$random_seed)
 
 ########################################################################
-### Step 1: Processing reference files                              ###
 ########################################################################
 # Read the mutations data from a CSV file
 # Select unique species from the mutations data and create a gene reference data frame
@@ -105,7 +104,6 @@ summaries <- list()
 for (i in 1:nrow(selected_muts)) {
   species <- selected_muts$Species[i]
   cat(paste0("Working on i = ", i, " - ", species, " species\n"))
-
   {
     # Search for reference genomes for the species in the NCBI assembly database
     # Check if the species is Escherichia coli and include strain in the search term
@@ -241,15 +239,15 @@ rm.all.but(c("globsets","my_target_gene","dataset" ), envir=.GlobalEnv)
 ### Step 2: Processing table of known STR resistance mutations       ###
 ########################################################################
 
-# input for this step: table of rpsL reference sequences ("./data/rpsL_references.csv")
-#                      fasta file with rpsL reference sequences (""./data/rpsL_references.fasta"")
+# input for this step: table of the target genes reference sequences ("./data/rpsL_references.csv")
+#                      fasta file with the target genes reference sequences (""./data/rpsL_references.fasta"")
 #                      table of reported STR mutations ("./data/reported_mutations.csv")
 # output for this step: coordinates ("./output/coordinates.RData"),
 #                       table of reported mutations ("./output/muts.csv")
 #                       a plot showing distributions of reported mutations ("./plots/reported_mutations.pdf)
 #                       a summary of the reported mutations ("./results/summary_reported_mutations.txt")
 
-# 1 get rpsL ref sequences coordination of all reference sequences against the one in Escherichia coli
+# 1 get the target genes ref sequences coordination of all reference sequences against the one in Escherichia coli
 
 # load reference sequences and their information
 refs <- read_csv(paste0("./data/",my_target_gene, "_references.csv"), show_col_types = FALSE)
@@ -303,7 +301,7 @@ plot_reported_mutations(added_warnings_muts, file_name = paste0("./plots/",my_ta
 summarise_reported_mutations(added_warnings_muts, file_name = "./results/summary_reported_mutations_original.txt") # returns a text message summarizing previous reports
 
 # Manually check all warnings and correct mutations
-checked_muts <- read.csv(paste0("./output/",my_target_gene,"__checked_muts.csv"))
+checked_muts <- read.csv(paste0("./output/",my_target_gene,"_checked_muts.csv"))
 
 # 3 summary and plot of reported mutations
 plot_reported_mutations(checked_muts, file_name = paste0("./plots/",my_target_gene,"_reported_mutations_manualfix.pdf"), n_frequency = 3) # returns frequent reported mutations, positions and species
@@ -351,10 +349,6 @@ gyrA_target_sequences <- get_target_sequences(
 )
 writeXStringSet(DNAStringSet(gyrA_target_sequences), filepath = paste0("output/",my_target_gene,"_target_sequences.fa"))
 
-# download and extract taxonomy information for downloaded genomes
-download_taxonomy(summaries, output_file = paste0("./data/",my_target_gene,"_NCBI_taxonomy.csv"))
-# download_taxonomy(summaries, output_file = "./data/rpsL_NCBI_taxonomy_with_species.csv")
-
 # empty working environment to keep everything clean
 rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 
@@ -363,7 +357,7 @@ rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 #########################################################################
 
 # input for this step:  processed table of reported mutations after manually modify all warnings ("./output/rpsL_checked_muts.csv")
-#                       reported frequencies of rpsL mutations under STR
+#                       reported frequencies of the target genes mutations under STR
 #                       E. coli rspL reference sequence (from "./data/rspL_references.fasta")
 #                       extracted rspL target sequences ("./output/rspL_target_sequences.fa")
 # output for this step: Table of screening results, including existing and evolvable mutations
@@ -384,7 +378,7 @@ mutation_list <- mutation_list_reports |>
   distinct() |>
   arrange(AA_pos_Ecoli, AA_mutation)
 
-# 3.screen all rpsL sequences for existing and possible mutations:
+# 3.screen all the target genes sequences for existing and possible mutations:
 gene_target_sequences = gene_target_sequences #[1:100]  #do a small screen as proof of concept and if its running correctly
 raw_output <- screen_target_sequences(gene_target_sequences, gene_reference_Ecoli,
   mutation_list,
@@ -480,30 +474,40 @@ rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 #                       plot showing the statistics for species with multiple gene copies ("./plots/rpsL_multicopy_stats.pdf")
 
 # 1. load required data:
-rpsL_target_sequences <- readDNAStringSet(paste0("./output/",my_target_gene,"_target_sequences.fa"))
-rpsL_reference_Ecoli <- readDNAStringSet(paste0("./data/",my_target_gene,"_references.fasta"))[[paste0(my_target_gene,"_Escherichia_coli_MG1655")]]
+gene_target_sequences <- readDNAStringSet(paste0("./output/",my_target_gene,"_target_sequences.fa"))
+gene_reference_Ecoli <- readDNAStringSet(paste0("./data/",my_target_gene,"_references.fasta"))[[paste0(my_target_gene,"_Escherichia_coli_MG1655")]]
 filtered_output <- read_csv(paste0("./output/",my_target_gene,"_filtered_output.csv"), show_col_types = FALSE)
-# bacterial_taxonomy <- read_csv("./data/rpsL_NCBI_taxonomy.csv", show_col_types = FALSE) # bacterial taxonomic information from NCBI
+
+
 meta_data <- read_csv("./data/gtdb_meta_data.csv", show_col_types = FALSE) # GTDB information on included species
 # bacterial taxonomic information from GTDB
 gtdb_taxonomy <- meta_data |>
   select(phylum, class, order, family, genus) |>
   distinct()
 write_csv(gtdb_taxonomy, "./data/gtdb_taxonomy.csv")
-
 gtdb_taxonomy <- read_csv("./data/gtdb_taxonomy.csv")
+
+
+#getting the region for targeting based on the mutation range found
+summary(filtered_output$AA_pos_Ecoli)
+from_ref <- max(1, min(filtered_output$AA_pos_Ecoli) - 50)
+to_ref <- max(filtered_output$AA_pos_Ecoli) + 50
+
 
 # 2. analysis of mutant screen:
 plot_mutation_screen(filtered_output, file_name = paste0("./plots/",my_target_gene,"_mutation_screen.pdf"))
 plot_classes_genera(filtered_output, gtdb_taxonomy, file_name = paste0("./plots/",my_target_gene,"_classes_genera.svg"))
 plot_evolvability_by_class(filtered_output, gtdb_taxonomy, file_name = paste0("./plots/",my_target_gene,"_evolvability_by_class.pdf"))
-summarise_mutation_screen(filtered_output, target_gene = my_target_gene, file_name = paste0("./results/summary_",,my_target_gene,"_mutation_screen.txt"))
+summarise_mutation_screen(filtered_output, target_gene = my_target_gene, file_name = paste0("./results/summary_",my_target_gene,"_mutation_screen.txt"))
 get_resistance_taxonomy(filtered_output, gtdb_taxonomy, file_path = "./output/", gene_name = my_target_gene)
 make_table_intrinsic_resistance(filtered_output, file_name = paste0("./results/",my_target_gene,"_predicted_resistance.csv"))
 
+
+
 # 3. analyse species with multiple gene copies:
-multiseq_stats <- compare_gene_copies(filtered_output, rpsL_target_sequences, rpsL_reference_Ecoli)
+multiseq_stats <- compare_gene_copies(filtered_output, gene_target_sequences, gene_reference_Ecoli, from_ref, to_ref)
 write_csv(multiseq_stats, paste0("./output/",my_target_gene,"_multiseq_stats.csv"))
+
 # multiseq_stats <- read_csv("./output/multiseq_stats.csv", show_col_types = FALSE)
 plot_multiseq_stats(multiseq_stats, paste0("./plots/",my_target_gene,"_multiseq.pdf"))
 
@@ -523,6 +527,8 @@ rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 #                       subtree of original tree (nwk file: "./output/rpsL_subtree.nwk")
 #                       plot of subtree
 
+
+library(ggplot2,lib.loc = "~/Rlibs/ggplot2_3.5.2") #will have to restart r after this
 # 1.load required files:
 filtered_output <- read_csv(paste0("./output/",my_target_gene,"_filtered_output.csv"), show_col_types = FALSE)
 #original_tree <- read.tree("./data/bac120.nwk") # GTDB bacterial tree of life
@@ -599,18 +605,24 @@ mutation_list_reports <- filter_mutations(muts,
 
 networks <- tribble(
   ~type, ~site_order, ~pos, ~focal_codon,
-  "type64", c(3, 2, 1), 43, "AAG",
-  "type28", c(3, 2, 1), 43, "AAG",
-  "type10", c(3, 2, 1), 43, "AAG",
-  "type10", c(3, 2, 1), 86, "CGT",
-  "type28", c(3, 2, 1), 86, "CGT",
-  "type64", c(3, 2, 1), 86, "CGT",
-  "type64", c(3, 2, 1), 92, "GGT",
-  "type28", c(3, 2, 1), 92, "GGT",
-  "type64", c(3, 2, 1), 88, "AAG",
-  "type28", c(3, 2, 1), 88, "AAG",
-  "type10", c(3, 2, 1), 88, "AAG",
-)
+  "type64", c(3, 2, 1), 72, "GAC",
+  "type64", c(3, 2, 1), 81, "GGT",
+  "type64", c(3, 2, 1), 82, "GAC",
+  "type64", c(3, 2, 1), 83, "TCG",
+  "type64", c(3, 2, 1), 84, "GCG",
+  "type64", c(3, 2, 1), 87, "GAC",
+  "type28", c(3, 2, 1), 72, "GAC",
+  "type28", c(3, 2, 1), 81, "GGT",
+  "type28", c(3, 2, 1), 82, "GAC",
+  "type28", c(3, 2, 1), 83, "TCG",
+  "type28", c(3, 2, 1), 84, "GCG",
+  "type28", c(3, 2, 1), 87, "GAC",
+  
+  
+  )
+
+
+
 
 for (i in 1:nrow(networks)) {
   plot_codon_network(
@@ -630,16 +642,15 @@ rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
 
 
 ########################################################################
-### Step 9: Plotting rpsL structure and sequence conservation       ###
+### Step 9: Plotting the target genes structure and sequence conservation       ###
 ########################################################################
-
 # load required data:
-rpsL_reference_Ecoli <- readDNAStringSet(paste0("./data/",my_target_gene,"_references.fasta"))[["rpsL_Escherichia_coli_MG1655"]]
+gene_reference_Ecoli <- readDNAStringSet(paste0("./data/",my_target_gene,"_references.fasta"))[[paste0(my_target_gene,"_Escherichia_coli_MG1655")]]
 filtered_output <- read_csv(paste0("./output/",my_target_gene,"_filtered_output.csv"), show_col_types = FALSE)
 filtered_targets <- filtered_output |>
   pull(target_name) |>
   unique()
-rpsL_target_sequences <- readDNAStringSet(paste0("./output/",my_target_gene,"_target_sequences.fa"))[filtered_targets]
+gene_target_sequences <- readDNAStringSet(paste0("./output/",my_target_gene,"_target_sequences.fa"))[filtered_targets]
 
 mutations <- read_csv(paste0("./output/",my_target_gene,"_checked_muts.csv"), show_col_types = FALSE) |>
   filter_mutations(
@@ -647,9 +658,9 @@ mutations <- read_csv(paste0("./output/",my_target_gene,"_checked_muts.csv"), sh
     min_n_studies = globsets$min_n_studies
   )
 
-# calculate conservation/diversity scores along the rpsL sequence:
+# calculate conservation/diversity scores along the the target genes sequence:
 set.seed(globsets$random_seed)
-cons <- get_conservation(rpsL_target_sequences, rpsL_reference_Ecoli, n_rnd = 1e5, n_workers = 10)
+cons <- get_conservation(gene_target_sequences, gene_reference_Ecoli, n_rnd = 1e5, n_workers = 10)
 save(cons, file = "./output/cons.RData")
 summarise_conservation(cons,
   target_gene = my_target_gene,
@@ -669,6 +680,7 @@ plot_cons(cons,
   dist_type = "grantham",
   file_name = "./plots/AA_conservation_grantham.pdf"
 )
+
 
 # download PDB file for E. coli rpsL:
 # pdb <- read.pdb("8cgj")

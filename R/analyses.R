@@ -335,7 +335,12 @@ filter_output <- function(output, min_seq_length, min_alig_score, max_core_dist)
 }
 
 
-compare_gene_copies <- function(filtered_output, target_sequences, reference_Ecoli) {
+compare_gene_copies <- function(filtered_output, target_sequences, reference_Ecoli, from_ref, to_ref) {
+  
+  
+  
+  
+  
   # species with more than one gene copy:
   multicopy_species <- filtered_output |>
     select(accession_numbers, gene_copy) |>
@@ -344,23 +349,31 @@ compare_gene_copies <- function(filtered_output, target_sequences, reference_Eco
     summarise(n = n(), .groups = "drop") |>
     filter(n > 1L) |>
     pull(accession_numbers)
-
+  
+  
   # If there are no species with multiple copies, proceed to the next step
   if (length(multicopy_species) == 0) {
     message("No species with multiple gene copies found.")
     return(invisible(NULL))
   }
-
+  
   protein_Ecoli <- Biostrings::translate(reference_Ecoli)
+  
+  
+  
   # If the gene is rpoB
   if (length(protein_Ecoli) > 300) {
-    core_Ecoli <- protein_Ecoli[501:600]
+    core_Ecoli <- protein_Ecoli[from_ref:to_ref]
+    #core_Ecoli <- protein_Ecoli[501:600]
   } else {
     # If the gene is rpsL
     core_Ecoli <- protein_Ecoli
   }
 
+  #plan(sequential) # for bug fixing
   plan(multisession) # to parallelise the function
+  
+  #multiseq_stats <- lapply(328:length(multicopy_species), function(i)
   multiseq_stats <- future_lapply(1:length(multicopy_species), function(i) {
     cat(paste0("Working on multi-copy species #", i, "/", length(multicopy_species), "...\n")) # notify when the analysis of each sequence starts
     seq_names <- filtered_output |>
@@ -400,12 +413,22 @@ compare_gene_copies <- function(filtered_output, target_sequences, reference_Eco
 
       if (length(protein_target1) > 300 & length(protein_target2) > 300) {
         # calculate Levenshtein distance between E. coli and target rpoB core region (AA pos 501...600):
-        from_target1 <- ALJEbinf::translateCoordinate(501, coords1, direction = "RefToFocal", AAinput = TRUE, AAoutput = TRUE)
-        to_target1 <- ALJEbinf::translateCoordinate(600, coords1, direction = "RefToFocal", AAinput = TRUE, AAoutput = TRUE)
+        from_target1 <- ALJEbinf::translateCoordinate(from_ref, coords1, direction = "RefToFocal", AAinput = TRUE, AAoutput = TRUE)
+        to_target1 <- ALJEbinf::translateCoordinate(to_ref, coords1, direction = "RefToFocal", AAinput = TRUE, AAoutput = TRUE)
+        from_target2 <- ALJEbinf::translateCoordinate(from_ref, coords2, direction = "RefToFocal", AAinput = TRUE, AAoutput = TRUE)
+        to_target2 <- ALJEbinf::translateCoordinate(to_ref, coords2, direction = "RefToFocal", AAinput = TRUE, AAoutput = TRUE)
+        
+        if (is.na(from_target1) || is.na(from_target2)) {
+          warning(
+            "Starting coordinate could not be mapped for ",
+            multicopy_species[i],
+            ". Skipping."
+          )
+          return(NULL)
+        }
         core_target1 <- protein_target1[from_target1:to_target1]
-        from_target2 <- ALJEbinf::translateCoordinate(501, coords2, direction = "RefToFocal", AAinput = TRUE, AAoutput = TRUE)
-        to_target2 <- ALJEbinf::translateCoordinate(600, coords2, direction = "RefToFocal", AAinput = TRUE, AAoutput = TRUE)
         core_target2 <- protein_target2[from_target2:to_target2]
+        
       } else {
         # calculate Levenshtein distance between E. coli and target rpsL
         core_target1 <- protein_target1

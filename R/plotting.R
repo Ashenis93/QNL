@@ -159,12 +159,12 @@ plot_mutation_screen <- function(filtered_output, file_name) {
                                       n_possible, 
                                       mutation_category)) |>
     mutate(mutation_category = factor(mutation_category, 
-                                      levels = c("impossible", "1", "2", "3", "present"))) |>
+                                      levels = c("impossible", "1", "2", "3", "4", "present"))) |>
     mutate(mutation_name = str_replace(mutation_name, "_", "")) |>
     mutate(mutation_name = factor(mutation_name, levels = sort(unique(mutation_name))))
     
   # cols = c(hsv(0, 0, c(0.2, 0.73, 0.8)), hsv(0, 1, 0.95))
-  cols <- c("#899DA4","#f9e5ae", "#FAEFD1", "#C93312")
+  cols <- c("#899DA4","#f9e5ae", "#FAEFD1", "#E7B66C", "#C93312")
     
   # plot A: screening outcome (possible, impossible, present) across mutations
   p_mutation_screen <- ggplot(data_for_plotting) +
@@ -385,8 +385,8 @@ plot_classes_genera <- function(filtered_output,
     ) +
     # scale_fill_manual(values = cols_class, guide = "none") + 
     scale_y_continuous(
-      breaks = 2:8,
-      limits = c(2, 8),
+      breaks = 2:16,
+      limits = c(2, 16),
       expand = c(0.01, 0.6)
     ) +
     guides(fill = guide_colourbar(
@@ -632,10 +632,8 @@ plot_target_sequences_stats <- function(final_output,
 
 
 plot_multiseq_stats <- function(multiseq_stats, file_name) {
-  cols <- c(
-  brewer.pal(9, "Set1"),            
-  "black"                         
-)
+  cols <- grDevices::hcl.colors(26)
+    #c(brewer.pal(9, "Set1"),"black")
   p <- ggplot(multiseq_stats) +
     geom_point(aes(x = alig_score, 
                    y = core_dist + rnorm(nrow(multiseq_stats), 0, 0.05),
@@ -643,7 +641,7 @@ plot_multiseq_stats <- function(multiseq_stats, file_name) {
                    shape = fct_relevel(case_when(resistance_status == 0 ~ "none", 
                                              resistance_status == 1 ~ "one copy", 
                                              resistance_status == 2 ~ "both copies"), "both copies", after = Inf))) +
-    scale_x_continuous(limits = c(0, 6000), ) +
+    scale_x_continuous(limits = c(-3000, 6000), ) +
     scale_color_manual(values = cols) +
     labs(x = "Alignment score", y = "Levenshtein distance", colour = "Genus", shape = "Resistance") +
     theme_bw()

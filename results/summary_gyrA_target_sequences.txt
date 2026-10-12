@@ -1,11 +1,11 @@
 Summary of screened target gyrA sequences 
-Date: 2026-09-24 10:40:51.54123
+Date: 2026-10-08 17:42:40.409889
 --------------------------------------------------------------------
 
 Target sequence statistics before filtering:
-    Number of genomes in search results: 22735
+    Number of genomes in search results: 22840
     Number of genomes with extracted gyrA sequence(s): 22638
-    Number of genomes where no gyrA sequence could be extracted: 97
+    Number of genomes where no gyrA sequence could be extracted: 202
     Number of species with downloaded genomes: 22633
     Total number of gyrA sequences: 23837
     Number of genomes with more than one gyrA sequence: 1133
