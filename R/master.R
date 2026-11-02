@@ -496,7 +496,7 @@ to_ref <- max(filtered_output$AA_pos_Ecoli) + 50
 
 # 2. analysis of mutant screen:
 plot_mutation_screen(filtered_output, file_name = paste0("./plots/",my_target_gene,"_mutation_screen.pdf"))
-plot_classes_genera(filtered_output, gtdb_taxonomy, file_name = paste0("./plots/",my_target_gene,"_classes_genera.svg"))
+plot_classes_genera(filtered_output, gtdb_taxonomy, file_name = paste0("./plots/",my_target_gene,"_classes_genera2.svg"))
 plot_evolvability_by_class(filtered_output, gtdb_taxonomy, file_name = paste0("./plots/",my_target_gene,"_evolvability_by_class.pdf"))
 summarise_mutation_screen(filtered_output, target_gene = my_target_gene, file_name = paste0("./results/summary_",my_target_gene,"_mutation_screen.txt"))
 get_resistance_taxonomy(filtered_output, gtdb_taxonomy, file_path = "./output/", gene_name = my_target_gene)
@@ -564,18 +564,38 @@ subtree <- read.tree(paste0("./output/",my_target_gene,"_subtree_relabelled.nwk"
 plot_subtree(subtree, species_output, gtdb_taxonomy, file_name = paste0("./plots/",my_target_gene,"_phylogeny_relabelled/whole_genome_tree.svg"))
 
 # smaller trees of individual clades:
-plot_subtree_clades(subtree, species_output, gtdb_taxonomy,
-  genera = c("Sphingomonas"),
-  families = c("Devosiaceae", "Mycobacteriaceae"),
-  orders = c("Pirellulales", "Sphingomonadales", "Rickettsiales"),
-  classes = c("Planctomycetia", "Alphaproteobacteria", "Coriobacteriia"),
-  file_path = paste0("./plots/",my_target_gene,"_phylogeny_relabelled/")
+#plot_subtree_clades(subtree, species_output, gtdb_taxonomy,
+#  genera = c("Sphingomonas"),
+#  families = c("Devosiaceae", "Mycobacteriaceae"),
+#  orders = c("Pirellulales", "Sphingomonadales", "Rickettsiales"),
+#  classes = c("Planctomycetia", "Alphaproteobacteria", "Coriobacteriia"),
+#  file_path = paste0("./plots/",my_target_gene,"_phylogeny_relabelled/")
+#)
+
+plot_subtree_clades(
+  subtree,
+  species_output,
+  gtdb_taxonomy,
+  genera = NULL,
+  families = c("Lachnospiraceae", "Devosiaceae", "Rhizobiaceae",
+               "Burkholderiaceae_D", "Anaplasmataceae", "Bacteroidaceae",
+               "Ruminococcaceae", "Caulobacteraceae", "Thermaceae"),
+  orders = c("Sphingomonadales","Rickettsiales"),
+  classes = c("Planctomycetia", "Alphaproteobacteria", "Gammaproteobacteria", "Bacteroidia"),
+  file_path = paste0(
+    "./plots/",my_target_gene,"_phylogeny_relabelled/")
 )
+
 
 summarise_phylogenetics(subtree, species_output, sample_n = globsets$phylo_stats_sample_n, paste0("./results/summary_",my_target_gene,"_phylogenetics_relabelled.txt"))
 
 # empty working environment to keep everything clean:
 rm.all.but(c("globsets","my_target_gene"), envir=.GlobalEnv)
+
+
+
+
+
 
 
 ########################################################################
@@ -666,16 +686,18 @@ summarise_conservation(cons,
   target_gene = my_target_gene,
   file_name = paste0("./results/summary_",my_target_gene,"_conservation.txt")
 )
+
+
 plot_cons(cons,
   pos = mutations |> pull(AA_pos_Ecoli) |> unique(),
-  pos_range = c(40, 100),
+  pos_range = c(40, 160),
   n_plots = 1,
   dist_type = "hamming",
   file_name = "./plots/AA_conservation_hamming.pdf"
 )
 plot_cons(cons,
   pos = mutations |> pull(AA_pos_Ecoli) |> unique(),
-  pos_range = c(40, 100),
+  pos_range = c(40, 160),
   n_plots = 1,
   dist_type = "grantham",
   file_name = "./plots/AA_conservation_grantham.pdf"
@@ -684,23 +706,25 @@ plot_cons(cons,
 
 # download PDB file for E. coli rpsL:
 # pdb <- read.pdb("8cgj")
-pdb <- read.pdb("./plots/8cgj.pdb")
+pdb <- read.pdb("./plots/9GGQ.pdb.txt")
 # Select L chain (Small ribosomal subunit protein uS12):
 # Select A chain (16S rRNA where streptomycin bind to)
-chain_selection <- atom.select(pdb, chain = c("L", "A"))
+chain_selection <- atom.select(pdb, chain = c("C", "A", "E","F","G","H"))
 # Extract the selected structure:
 pdb_chain <- trim.pdb(pdb, chain_selection)
 # Save the selected structure to a PDB file
-write.pdb(pdb_chain, file = "./data/8cgj_chain.pdb")
+write.pdb(pdb_chain, file = "./data/9GGQ_chain.pdb")
 # Produce html file of protein structure with distance to E. coli indicated:
-# load("./output/cons.RData")
+load("./output/cons.RData")
+
 visualise_rpsL_structure(
-  file_pdb = "./data/8cgj_chain.pdb",
-  chain_ids = c("L", "A"),
-  pos = mutations |> pull(AA_pos_Ecoli) |> unique(),
-  mut_colour_variable = cons$means$grantham_Ecoli,
-  file_html = paste0("./plots/",my_target_gene,"_structure.html")
+  file_pdb = "./data/9GGQ_chain.pdb",
+  chain_ids = c("C", "A", "E", "F"),
+  mutation_chain_ids = c("C", "A"),
+  AA_pos = mutations |> pull(AA_pos_Ecoli) |> unique(),
+  file_html = paste0("./plots/", my_target_gene, "_structure.html")
 )
+
 quarto_render(paste0("plots/",my_target_gene,"_structure_embedding.qmd"))
 
 ########################################################################
@@ -710,11 +734,11 @@ quarto_render(paste0("plots/",my_target_gene,"_structure_embedding.qmd"))
 # collating all individual summary files and rendering them as a single pdf file:
 render_summary(
   summaries = c(
-    "rpsL_reported_mutations_manualfix",
-    "rpsL_target_sequences",
-    "rpsL_mutation_screen",
-    "rpsL_phylogenetics",
-    "rpsL_conservation"
+    paste0(my_target_gene,"_reported_mutations_manualfix"),
+    paste0(my_target_gene,"_target_sequences"),
+    paste0(my_target_gene,"_mutation_screen"),
+    paste0(my_target_gene,"_phylogenetics_relabelled"),
+    paste0(my_target_gene,"_conservation")
   ),
   preamble = "./data/summary_preamble.qmd",
   summaries_path = "./results",

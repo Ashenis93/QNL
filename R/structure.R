@@ -11,7 +11,8 @@
 #' @return returns the visualisation in html format
 #' 
 visualise_rpsL_structure <- function(file_pdb, 
-                                     chain_ids = c("L","A"),
+                                     chain_ids,
+                                     mutation_chain_ids,
                                      AA_pos,
                                      n_cols = 100,
                                      file_html) {
@@ -42,11 +43,13 @@ visualise_rpsL_structure <- function(file_pdb,
                         ))
   }
   ngl <- ngl |>
-    addRepresentation("distance", param = list(
-      atomPair = list(list("12:L.CA", "20:L.CA")), # Specify the atom pair here
-      color = chain_colors[1],
-      labelVisible = FALSE
-    )) 
+    addRepresentation(
+      "ball+stick",
+      param = list(
+        sele = "(201:H or 201:F)",
+        color = "element"
+      )
+    )
   
   # Add the ligand as ball+stick
   ngl <- ngl |>
@@ -58,26 +61,28 @@ visualise_rpsL_structure <- function(file_pdb,
   
 
   # add labels at known mutation sites:
-  for(p in AA_pos) {
-    ngl <- ngl |> 
-      addRepresentation("label",
-                        param = list(
-                          sele = paste(p, "and .CA and", paste0(":", chain_ids[1])),
-                          #labelType = "format",
-                          #labelFormat = "%(resname)s%(resno)s",
-                          labelGrouping = "residue",
-                          showBackground = TRUE,
-                          showBorder = TRUE,
-                          borderColor = "black",
-                          colorValue = "black",
-                          # backgroundColor = colourScale[col_i],
-                          backgroundColor = "red",
-                          backgroundOpacity = 1,
-                          radius = 3,
-                          fixedSize = FALSE
-                        )) #|>
-#      addRepresentation("line",
-#                        param = list(sele = as.character(p), colorValue = "grey30"))
+  for (chain in mutation_chain_ids) {
+    for(p in AA_pos) {
+      ngl <- ngl |> 
+        addRepresentation("label",
+                          param = list(
+                            sele = paste(p, "and .CA and", paste0(":", chain)),
+                            #labelType = "format",
+                            #labelFormat = "%(resname)s%(resno)s",
+                            labelGrouping = "residue",
+                            showBackground = TRUE,
+                            showBorder = TRUE,
+                            borderColor = "black",
+                            colorValue = "black",
+                            # backgroundColor = colourScale[col_i],
+                            backgroundColor = "red",
+                            backgroundOpacity = 1,
+                            radius = 3,
+                            fixedSize = FALSE
+                          )) #|>
+  #      addRepresentation("line",
+  #                        param = list(sele = as.character(p), colorValue = "grey30"))
+    }
   }
   
   # export as html:

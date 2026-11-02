@@ -272,15 +272,20 @@ plot_subtree <- function(subtree, species_output, bacterial_taxonomy, file_name)
   # clades to be labeled in the tree:
   clade_labels <- tibble::tribble(
     ~clade, ~tier,
-    "Planctomycetia", "major",
-    "Actinomycetes", "major",
+    "Planctomycetia",      "major",
     "Alphaproteobacteria", "major",
-    "Sphingomonadales", "minor",
-    "Devosiaceae", "minor",
-    "Rickettsiales", "minor",
-    "Coriobacteriia", "major",
     "Gammaproteobacteria", "major",
-    "Bacteroidia", "major"
+    "Bacteroidia",         "major",
+    "Ruminococcaceae",     "minor",
+    "Sphingomonadales",    "minor",
+    "Devosiaceae",         "minor",
+    "Rickettsiales",       "minor",
+    "Devosiaceae", "minor",
+    "Rhizobiaceae", "minor",
+    "Burkholderiaceae_D", "minor",
+    "Bacteroidaceae", "minor",
+    "Lachnospiraceae", "major",
+    "Caulobacteraceae", "minor",
   )
 
   # change tip labels to make manipulations easier:
@@ -348,7 +353,7 @@ plot_subtree <- function(subtree, species_output, bacterial_taxonomy, file_name)
 
   # add predicted resistance:
   p1 <- gheatmap(p_tree, species_data |> select(species, resistance) |> column_to_rownames(var = "species"),
-    offset = 0, color = NULL, colnames = FALSE, width = 0.05
+    offset = -8, color = NULL, colnames = FALSE, width = 0.05
   ) +
     scale_fill_manual(
       values = c("resistant" = "#ba181b", "susceptible" = "#d3d3d3"),
@@ -360,7 +365,7 @@ plot_subtree <- function(subtree, species_output, bacterial_taxonomy, file_name)
   # add predicted evolvability:
   p2 <- gheatmap(p1 + new_scale_fill(),
     species_data |> select(species, evolvabilityI) |> column_to_rownames(var = "species"),
-    offset = 3.4, color = NULL, colnames = FALSE, width = 0.05
+    offset = -4.6, color = NULL, colnames = FALSE, width = 0.05
   ) +
     scale_fill_gradientn(colours = c("#0077b6", "#ffd700"), na.value = "grey20", name = "Predicted\nevolvability") +
     scale_y_continuous(limits = c(0, round(1.005 * (nrow(data_tree) + 1) / 2)))
@@ -378,11 +383,12 @@ plot_subtree <- function(subtree, species_output, bacterial_taxonomy, file_name)
         fontsize = 3.0,
         barcolour = major_cols,
         textcolour = major_cols,
-        offset.text = 2.0,
-        offset = 9,
+        offset.text = 10.5,
+        offset = 1,
         barsize = 2,
         horizontal = FALSE,
-        hjust = 0.5
+        hjust = 0.5,
+        vjust = 1.45
       )
   }
 
@@ -399,11 +405,12 @@ plot_subtree <- function(subtree, species_output, bacterial_taxonomy, file_name)
           fontsize = 3.0,
           barcolour = minor_cols[i],
           textcolour = minor_cols[i],
-          offset.text = 2.0,
-          offset = 11.5,
+          offset.text = 13,
+          offset = 3,
           barsize = 2,
           horizontal = FALSE,
-          hjust = 0.5
+          hjust = .5,
+          vjust = -.5
         )
     }
   }

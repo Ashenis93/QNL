@@ -78,8 +78,9 @@ plot_reported_mutations <- function(muts, file_name, n_frequency) {
     scale_fill_manual(values = c(
       "Lab-generated" = "#3B9AB2",  
       "Isolate" = "#EBCC2A",       
-      "Both" = "#EF5703"            
-    ), breaks=c('Lab-generated', 'Isolate', 'Both')) +
+      "Both" = "#EF5703"
+    ), breaks=c('Lab-generated', 'Isolate', 'Both'),
+    na.value = "#9BAF5D") +
     coord_flip()
     # scale_fill_brewer(palette = "Spectral", breaks=c('Lab-generated', 'Isolate', 'Both')) 
 
@@ -118,7 +119,7 @@ plot_reported_mutations <- function(muts, file_name, n_frequency) {
       "Lab-generated" = "#3B9AB2",  
       "Isolate" = "#EBCC2A",       
       "Both" = "#EF5703"            
-    )) +
+    ),na.value = "#9BAF5D") +
     coord_flip()
     # scale_fill_brewer(palette = "Pastel1") 
 
@@ -173,8 +174,8 @@ plot_mutation_screen <- function(filtered_output, file_name) {
     theme_bw() +
     theme(axis.text.x = element_text(angle=0, 
                                      vjust=0.5, 
-                                     hjust=0.95,
-                                     size=12), 
+                                     #hjust=0.95,
+                                     size=10), 
           axis.text.y = element_text(size=12),
           axis.title.x=element_text(size=14, face = "bold"),
           axis.title.y=element_text(size=14, face = "bold"),
@@ -183,7 +184,9 @@ plot_mutation_screen <- function(filtered_output, file_name) {
           legend.position = "bottom") +
     labs(x = "Amino acid substitution",
          y = "Number of species") +
-    scale_y_continuous(breaks = seq(0, 20000, by = 1000), expand = c(0.01, 0)) +
+    scale_y_continuous(
+      breaks = seq(0, 20000, by = 2000), 
+      expand = c(0.01, 0)) +
     scale_fill_manual(values = cols, name = "Mutation possibility:") +
     labs(fill = "") + 
     coord_flip()
